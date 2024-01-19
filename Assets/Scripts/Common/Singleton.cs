@@ -1,6 +1,6 @@
 /*
 日期：
-功能：不继承Mono的C#单例（懒加载、线程不安全)
+功能：不继承Mono的普通C#单例（懒加载、线程不安全)
 作者：小人
 版本号：
 */
@@ -21,8 +21,5 @@ public class Singleton
 
     }
 
-    public void Test()
-    {
-
-    }
+    
 }

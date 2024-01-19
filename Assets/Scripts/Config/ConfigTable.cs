@@ -22,12 +22,18 @@ public class ConfigTable<T,K> :MonoSingleton<K>
     where T:TableData,new()
     where K:MonoSingleton<K>
 {
-    public Dictionary<int,T> Cache = new Dictionary<int,T>();
+    //关于反射性能开销较大，这里一般读取一次 把数据缓存
+    private Dictionary<int,T> Cache = new Dictionary<int,T>();
 
     public void Load(string ConfigPath)
     {
-        using (StreamReader stream = new StreamReader(ConfigPath))
+        //注意不同平台下路径不同 需根据平台去写
+        string url = Application.streamingAssetsPath + ConfigPath;
+
+        //流读取配置表
+        using (StreamReader stream = new StreamReader(url))
         {
+            //读第一行获取相关表格的属性信息 确保数据的类型与属性信息一一对应
           string str=  stream.ReadLine();
           string[] proInfo=  str.Split(',');
             List<PropertyInfo> infolist = new List<PropertyInfo>();
@@ -37,6 +43,7 @@ public class ConfigTable<T,K> :MonoSingleton<K>
                 infolist.Add(info);
             }
 
+            //正式循环读取
             string res;
             while((res=stream.ReadLine())!=null)
             {

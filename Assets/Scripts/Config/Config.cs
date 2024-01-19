@@ -1,6 +1,6 @@
 /*
 日期：
-功能:配置类 有关资源加载等路径统一填写在这里 
+功能:配置类 有关资源加载的路径的相关变量统一填写在这里 
 作者：小人
 版本号：
 */
@@ -11,7 +11,7 @@ using UnityEngine;
 
 public static  class Config 
 {
-
-    public static string TablePath = Application.streamingAssetsPath + "/Table.csv.bytes";
-    public static string RoleTablePath = Application.streamingAssetsPath + "/Role.csv.bytes";
+    //为了避免外界修改改为Const 
+    public const string TablePath =  "/Table.csv.bytes";
+    public const string RoleTablePath =  "/Role.csv.bytes";
 }
