@@ -1,3 +1,3 @@
-ID,RoleName
-1,妲己
-2,典韦
+﻿ID,RoleName,ModelPath,InitPos
+1,妲己,HeroPrefabs/1091_DaJi_LOD1,-27.24$0$-38.04
+2,典韦,HeroPrefabs/1291_DianWei_LOD1,-25.89$0$-38.82

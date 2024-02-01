@@ -27,6 +27,8 @@ public class ConfigTable<T,K> :MonoSingleton<K>
 
     public void Load(string ConfigPath)
     {
+        Cache.Clear();
+
         //注意不同平台下路径不同 需根据平台去写
         string url = Application.streamingAssetsPath + ConfigPath;
 
@@ -78,6 +80,55 @@ public class ConfigTable<T,K> :MonoSingleton<K>
             else if (infolist[i].PropertyType == typeof(double))
             {
                 infolist[i].SetValue(data, Convert.ToDouble(values[i]));
+            }
+            //下面解析Vector3 List 等结构时 统一使用$隔开
+            //这里只写一个解析Vector3的示例
+            else if(infolist[i].PropertyType==typeof(Vector3))
+            {
+                string[] temp= values[i].Split('$');
+                if(temp.Length==3)
+                {
+                    Vector3 v = new Vector3(float.Parse(temp[0]), float.Parse(temp[1]), float.Parse(temp[2]));
+                    infolist[i].SetValue(data, v);
+                }
+                else
+                {
+                    Debug.LogError("配置表Vector3配置错误");
+                }
+            }
+            //List<int>
+            else if(infolist[i].PropertyType == typeof(List<int>))
+            {
+                string[] temp = values[i].Split('$');
+                List<int> res = new List<int>();
+                for(int k=0;k<temp.Length;k++)
+                {
+                    res.Add(int.Parse(temp[k]));
+                }
+                infolist[i].SetValue(data, res);
+
+            }
+            else if (infolist[i].PropertyType == typeof(List<float>))
+            {
+                string[] temp = values[i].Split('$');
+                List<float> res = new List<float>();
+                for (int k= 0; k < temp.Length; k++)
+                {
+                    res.Add(float.Parse(temp[k]));
+                }
+                infolist[i].SetValue(data, res);
+
+            }
+            else if (infolist[i].PropertyType == typeof(List<string>))
+            {
+                string[] temp = values[i].Split('$');
+                List<string> res = new List<string>();
+                for (int k = 0; k < temp.Length; k++)
+                {
+                    res.Add(temp[k]);
+                }
+                infolist[i].SetValue(data, res);
+
             }
         }
         return data;

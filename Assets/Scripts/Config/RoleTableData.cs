@@ -14,4 +14,6 @@ public class RoleTableData : TableData
 
 
    public string RoleName {  get; set; }
+   public string ModelPath { get; set; }
+   public Vector3 InitPos { get; set; }
 }

@@ -1,6 +1,6 @@
 /*
 日期：
-功能：资源加载用该类统一加载 还未完善 哪儿有新问题 再修改
+功能：资源加载用该类统一加载,后续完善  为加载ab包、编辑器测试、引入对象池准备
 作者：小人
 版本号：
 */
@@ -17,6 +17,24 @@ public class ResLoader : MonoSingleton<ResLoader>
     {
        return Resources.Load(path);
     }
+
+    public static T ResLoad<T>(string path) where T:Object
+    {
+        return Resources.Load<T>(path);
+    }
+
+    //获取Resources 文件夹下的实例物体
+    public static GameObject ResGetInstance(string path)
+    {
+      return  Instantiate(ResLoad(path)) as GameObject;
+    }
+
+    public static T ResGetInstance<T>(string path) where T:Object
+    {
+      GameObject g=  Instantiate(ResLoad<T>(path)) as GameObject;
+       return g as T; 
+    }
+
     //AB包的加载
     
     private string ReadPath
@@ -113,13 +131,27 @@ public class ResLoader : MonoSingleton<ResLoader>
 
 
     //加载ab包中资源 
-    public Object LoadRes(string abName, string gameObjName)
+    public Object ABLoad(string abName, string gameObjName)
     {
         AssetBundle ab = LoadAssetBundle(abName);
 
           return ab.LoadAsset(gameObjName);
-       
-       
     }
 
+    public T ABLoad<T> (string abName,string gameObjName) where T:Object
+    {
+        AssetBundle ab = LoadAssetBundle(abName);
+        return  ab.LoadAsset(gameObjName) as T;
+    }
+
+    //根据包名 物体名 生成游戏物体实例
+    public  GameObject ABGetInstance(string abName,string gameObjName)
+    {
+        return Instantiate(ABLoad(abName,gameObjName)) as GameObject;
+    }
+
+    public T ABGetInstance<T>(string abName, string gameObjName) where T:Object
+    {
+      return  ABGetInstance(abName, gameObjName) as T;
+    }
 }

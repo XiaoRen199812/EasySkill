@@ -9,49 +9,30 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+
+
+
 
 public class Test : MonoBehaviour
 {
-    CharacterAnimControl characterAnimControl;
-    private Animator animator;
-    void Start()
-    {
-        TestConfig();
 
-        animator = GetComponent<Animator>();
-        if (characterAnimControl == null)
-        {
-            characterAnimControl = transform.AddComponent<CharacterAnimControl>();
-            characterAnimControl.Init(animator);
-        }
+   
 
 
-    }
-
-    //测试动画
     private void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Q");
-            characterAnimControl.PlayATK1();
-            characterAnimControl.IsReset = true;
+            UIMgr.Instance.RemoveUIObj("Skills(Clone)", UILayer.Fight);
         }
-        if (Input.GetKeyDown(KeyCode.W))
+       
+        if(Input.GetMouseButtonDown(1))
         {
-            Debug.Log("W");
-            characterAnimControl.PlayATK2();
-            characterAnimControl.IsReset = true;
+            UIMgr.Instance.AddUIObj("Test/Skills", UILayer.Fight);
+            
         }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log("E");
-            characterAnimControl.PlayATK3();
-            characterAnimControl.IsReset = true;
-        }
-
-
+       
     }
 
     //测试配置表读取
@@ -59,8 +40,10 @@ public class Test : MonoBehaviour
     {
         RoleTable.Instance.Load(Config.RoleTablePath);
        var dic= RoleTable.Instance.GetDic();
-        Debug.Log(dic[1].RoleName);
-        Debug.Log(dic[2].RoleName);
+        Debug.Log(dic[1].ID);
+        Debug.Log(dic[1].InitPos);
+        Debug.Log(dic[1].ModelPath);
+       
     }
 
 }
