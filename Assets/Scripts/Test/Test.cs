@@ -16,22 +16,26 @@ using UnityEngine.UI;
 
 public class Test : MonoBehaviour
 {
-
-   
+    public Role role;
+    public void Start()
+    {
+        role = FindObjectOfType<Role>();
+    }
 
 
     private void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
-            UIMgr.Instance.RemoveUIObj("Skills(Clone)", UILayer.Fight);
+         Ray ray=   Camera.main.ScreenPointToRay(Input.mousePosition);
+           
+            if (Physics.Raycast(ray,out RaycastHit hit))
+            {
+                role.SetMoveTarget(hit.point);
+            }
         }
        
-        if(Input.GetMouseButtonDown(1))
-        {
-            UIMgr.Instance.AddUIObj("Test/Skills", UILayer.Fight);
-            
-        }
+        
        
     }
 

@@ -12,16 +12,21 @@ using UnityEngine;
 public class GameEngine : MonoSingleton<GameEngine>
 {
     
-    private void Start()
+    private void OnEnable()
     {
         GameObject ui = ResLoader.ResGetInstance("UI/Canvas");
         UIMgr.Instance.Init(ui);
 
         RoleTable.Instance.Load(Config.RoleTablePath);
         var dic= RoleTable.Instance.GetDic();
+
         GameObject go=   ResLoader.ResGetInstance(dic[1].ModelPath);
         go.transform.position = dic[1].InitPos;
         go.transform.rotation = Quaternion.Euler(0, 80, 0);
+        Role role=go.AddComponent<Role>();
+        RoleTableData data = new RoleTableData();
+        role.Init(data);
+       
     }
 
 }
