@@ -36,8 +36,7 @@ public class TransformHelper
                 return arr[i];
             }
         }
-        return null;
-        
+        return null;  
     }
 
     //递归查找
@@ -45,16 +44,22 @@ public class TransformHelper
     public static Transform FindChild(Transform parent, string name)
     {
         Transform child = parent.Find(name);
-        if(child!=null)
+        if (child != null)
         {
             return child;
         }
-
-        for(int i=0; i<parent.childCount;i++)
+        else
         {
-            FindChild(parent.GetChild(i), name);
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                Transform tf = parent.GetChild(i);
+               Transform result= FindChild(tf, name);
+                if(result!=null)
+                {
+                    return result;
+                }
+            }
         }
-
         return null;
     }
 }

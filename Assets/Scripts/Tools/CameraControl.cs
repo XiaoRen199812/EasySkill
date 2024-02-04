@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 //注 可将PosOffest 设为(1.48, 9.92, -8.48) _smooth设为10
-//摄像机的 rotation(47.3,-6.38,0)
+//摄像机的 rotation(45.3, 2.6, 0.16) poaition (-25.765, 10, -46.52)
 public class CameraControl : MonoBehaviour
 {
 
@@ -24,8 +24,7 @@ public class CameraControl : MonoBehaviour
     private float _smooth;
 
     private Vector3 _lateRotation;
-    //(1.48, 9.92, -8.48) Pos
-    //(45.3,3.6,0.16) Rot
+    
     private void Start()
     {
         
@@ -37,10 +36,13 @@ public class CameraControl : MonoBehaviour
     private void LateUpdate()
     {
 
+        if (_followTarget != null)
+        {
 #if UNITY_EDITOR
-        SetRotation();
+            SetRotation();
 #endif
-        transform.position = Vector3.Lerp(transform.position, _followTarget.position + PosOffest, _smooth*Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, _followTarget.position + PosOffest, _smooth * Time.deltaTime);
+        }
       
        
     }

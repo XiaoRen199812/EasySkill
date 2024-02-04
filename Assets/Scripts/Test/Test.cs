@@ -25,6 +25,7 @@ public class Test : MonoBehaviour
 
     private void Update()
     {
+        /*
         if(Input.GetMouseButtonDown(0))
         {
          Ray ray=   Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -34,6 +35,9 @@ public class Test : MonoBehaviour
                 role.SetMoveTarget(hit.point);
             }
         }
+        */
+
+      
        
         
        
@@ -42,11 +46,11 @@ public class Test : MonoBehaviour
     //测试配置表读取
     private void TestConfig()
     {
-        RoleTable.Instance.Load(Config.RoleTablePath);
-       var dic= RoleTable.Instance.GetDic();
-        Debug.Log(dic[1].ID);
-        Debug.Log(dic[1].InitPos);
-        Debug.Log(dic[1].ModelPath);
+       // RoleTable.Instance.Load(Config.RoleTablePath);
+       //var dic= RoleTable.Instance.GetDic();
+        //Debug.Log(dic[1].ID);
+        //Debug.Log(dic[1].InitPos);
+        //Debug.Log(dic[1].ModelPath);
        
     }
 

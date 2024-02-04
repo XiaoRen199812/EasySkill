@@ -41,7 +41,7 @@ public class UIMgr : MonoSingleton<UIMgr>
         Transform _system = _root.transform.Find("System");
         LayerDic.Add(UILayer.System, _system);
 
-        Transform _announcement = _root.transform.Find(" Announcement");
+        Transform _announcement = _root.transform.Find("Announcement");
         LayerDic.Add(UILayer.Announcement, _announcement);
     }
 
@@ -49,16 +49,79 @@ public class UIMgr : MonoSingleton<UIMgr>
     public  void AddUIObj(string resPath,UILayer uiLayer)
     {
         GameObject go=  ResLoader.ResGetInstance(resPath);
-        go.transform.SetParent(LayerDic[uiLayer],false);
+        if (LayerDic.ContainsKey(uiLayer))
+        {
+            go.transform.SetParent(LayerDic[uiLayer], false);
+        }
+       
+    }
+
+    public void AddUIObj(string resPath,UILayer uiLayer,RectTransform rectTransform)
+    {
+        GameObject go = ResLoader.ResGetInstance(resPath);
+        if (LayerDic.ContainsKey(uiLayer))
+        {
+            go.transform.SetParent(LayerDic[uiLayer], false);
+            RectTransform rect = go.transform as RectTransform;
+            rect = rectTransform;
+        }
+    }
+
+    public void AddUIObj(string resPath, UILayer uiLayer, Vector3 pos)
+    {
+        GameObject go = ResLoader.ResGetInstance(resPath);
+        if (LayerDic.ContainsKey(uiLayer))
+        {
+            go.transform.SetParent(LayerDic[uiLayer], false);
+
+            RectTransform rect = go.transform as RectTransform;
+            rect.anchoredPosition3D = pos;
+        }
+       
     }
 
     public  void RemoveUIObj(string uiName, UILayer uiLayer)
     {
-      
-        Transform tf=   TransformHelper.FindChild(LayerDic[uiLayer], uiName);
-        if (tf != null)
+        if (LayerDic.ContainsKey(uiLayer))
         {
-            GameObject.Destroy(tf.gameObject);
+            Transform tf = TransformHelper.FindChild(LayerDic[uiLayer], uiName);
+            if (tf != null)
+            {
+                GameObject.Destroy(tf.gameObject);
+            }
         }
+    }
+
+    public Transform FindLayer(UILayer uiLayer)
+    {
+        if(LayerDic.ContainsKey(uiLayer))
+        {
+            return LayerDic[uiLayer];
+        }
+        return null;
+    }
+
+
+    public void RemoveUILayer(UILayer uiLayer)
+    {
+        if (LayerDic.ContainsKey(uiLayer))
+        {
+            
+            if (LayerDic[uiLayer].childCount >0)
+            {
+                TransformHelper.DestoryAllChild(LayerDic[uiLayer]);
+            }     
+        }
+    }
+
+    public void RemoveAllUILayer()
+    {
+
+        RemoveUILayer(UILayer.Normal);
+        RemoveUILayer(UILayer.Touch);
+        RemoveUILayer(UILayer.Fight);
+        RemoveUILayer(UILayer.System);
+        RemoveUILayer(UILayer.Announcement);
+
     }
 }
