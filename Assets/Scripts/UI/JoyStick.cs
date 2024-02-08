@@ -10,11 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
-
-
-
-public class JoyStick : MonoBehaviour,IPointerDownHandler,IDragHandler,IPointerUpHandler
+public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     private Transform _root;
 
@@ -124,8 +120,6 @@ public class JoyStick : MonoBehaviour,IPointerDownHandler,IDragHandler,IPointerU
        Init(this.transform, imgDirBg, imgDirPoint, arrowRoot);
         InitPos = _imgDirBg.position;
         
-      
-
         _role = FindObjectOfType<Role>();
     }
    
