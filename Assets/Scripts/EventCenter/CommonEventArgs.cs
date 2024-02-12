@@ -12,7 +12,12 @@ using UnityEngine;
 
 public class CommonEventArgs : EventArgs
 {
-   
+
+}
+
+public class JoyStickMoveEventArgs : EventArgs
+{
+    public Vector3 target;
 }
 
 

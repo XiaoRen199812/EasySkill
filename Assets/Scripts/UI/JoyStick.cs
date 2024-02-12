@@ -29,7 +29,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     //小球移动最大距离
     private float Distance=80;
 
-    private Role _role;
+    //private Role _role;
 
     //计算人物移动目标点相关系数
     private float S = 1;
@@ -53,15 +53,20 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         BallMove(eventData.position);
         ArrowRotate(eventData.position);
        
-        if(_role!=null)
-        {
-            
-            Vector3 dir = new Vector3(eventData.position.x, eventData.position.y, 0) - _imgDirBg.position;
-            Vector3 D = dir.normalized;
+        //if(_role!=null)
+        //{
+        //    Vector3 dir = new Vector3(eventData.position.x, eventData.position.y, 0) - _imgDirBg.position;
+        //    Vector3 D = dir.normalized;
            
-            // 乘以系数控制远近
-            _role.SetMoveTarget(_role.transform.position + new Vector3(D.x,0,D.y)*S);
-        }
+        //    // 乘以系数控制远近
+        //    _role.SetMoveTarget(_role.transform.position + new Vector3(D.x,0,D.y)*S);
+        //}
+
+        Vector3 dir = new Vector3(eventData.position.x, eventData.position.y, 0) - _imgDirBg.position;
+        Vector3 D = dir.normalized;
+        JoyStickMoveEventArgs e = new JoyStickMoveEventArgs();
+        e.target = new Vector3(D.x, 0, D.y) * S;
+        EventCenter.Instance.TriggerEventAndBroadcastAll(EventName.eventJoyStickMove,this.gameObject,e);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -120,9 +125,9 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
        Init(this.transform, imgDirBg, imgDirPoint, arrowRoot);
         InitPos = _imgDirBg.position;
         
-        _role = FindObjectOfType<Role>();
+       // _role = FindObjectOfType<Role>();
     }
-   
-   
-   
+
+    
+
 }

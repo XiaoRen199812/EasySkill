@@ -17,9 +17,14 @@ using UnityEngine.UI;
 public class Test : MonoBehaviour
 {
     public Role role;
+
+    Timer timer;
     public void Start()
     {
-        role = FindObjectOfType<Role>();
+        //role = FindObjectOfType<Role>();
+
+        //TimeMgr.Instance.StartTask(1, () => { Debug.Log("Task1"); }, 3);
+        //TimeMgr.Instance.StartTask(0.5f, () => { Debug.Log("Task2"); },4);
     }
 
 
@@ -37,10 +42,11 @@ public class Test : MonoBehaviour
         }
         */
 
-      
-       
-        
-       
+
+        //timer.Loop();
+
+
+
     }
 
     //测试配置表读取

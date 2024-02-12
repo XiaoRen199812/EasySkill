@@ -5,6 +5,7 @@
 版本号：
 */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -40,9 +41,16 @@ public class Role : MonoBehaviour
         
     }
 
-    public void SetMoveTarget(Vector3 pos)
+    //public void SetMoveTarget(Vector3 pos)
+    //{
+    //    _target = pos;
+    //}
+
+    public void SetMoveTarget(object sender,EventArgs args)
     {
-        _target = pos;
+        JoyStickMoveEventArgs e= args as JoyStickMoveEventArgs;
+        
+        _target = this.transform.position+e.target;
     }
 
     private void MoveToTarget()
@@ -61,5 +69,11 @@ public class Role : MonoBehaviour
     private void Update()
     {
         MoveToTarget();
+    }
+
+
+    private void OnEnable()
+    {
+        EventCenter.Instance.RegesitEvent(EventName.eventJoyStickMove, SetMoveTarget);
     }
 }
