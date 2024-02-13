@@ -11,6 +11,7 @@ using UnityEngine;
 
 public class MonoSingleton<T> : MonoBehaviour where T: MonoBehaviour
 {
+    
     private static T _instance;
 
     public static T Instance {  
@@ -20,6 +21,7 @@ public class MonoSingleton<T> : MonoBehaviour where T: MonoBehaviour
                 _instance = FindObjectOfType<T>();
                 if(_instance == null)
                 {
+                    
                     GameObject go = new GameObject(typeof(T).Name);
                     _instance = go.AddComponent<T>();
                 }
@@ -29,9 +31,9 @@ public class MonoSingleton<T> : MonoBehaviour where T: MonoBehaviour
     
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         GameObject.DontDestroyOnLoad(this);
     }
-
+    
 }

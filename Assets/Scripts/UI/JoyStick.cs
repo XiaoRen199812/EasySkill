@@ -1,7 +1,7 @@
 
 /*
 日期：
-功能：
+功能：摇杆脚本 
 作者：小人
 版本号：
 */
@@ -106,12 +106,11 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
         //点乘     a·b=|a|·|b|cos<a,b>    Vector3.Dot (a, b)
         //叉乘      c =a x b  其中a,b,c均为向量。即两个向量的叉积得到的还是向量  Vector3.Cross (a, b);
-        Vector3 a1=   Vector3.Cross(new Vector3(1, 0, 0), dir.normalized);
-       // Vector3 a2 = Vector3.Cross(dir.normalized,new Vector3(1, 0, 0));
+        // Vector3 a2 = Vector3.Cross(dir.normalized,new Vector3(1, 0, 0));
         //Debug.Log("a1:" + a1 + "a2:" + a2);
         //Vector3 a1 = Vector3.Cross(new Vector3(1, 0, 0), dir.normalized);
-        
-       angle= a1.z > 0 ?angle: 360 - angle;
+        Vector3 a1 = Vector3.Cross(new Vector3(1, 0, 0), dir.normalized);
+        angle = a1.z > 0 ?angle: 360 - angle;
         (_arrowRoot.transform as RectTransform).rotation=Quaternion.Euler(0,0,angle);
     }
      

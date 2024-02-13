@@ -23,6 +23,7 @@ public class Role : MonoBehaviour
 
     private Animator _animator;
 
+    //移动目标可空  主要避免引入过多标志位
     private Vector3? _target=null;
 
     public void Init(RoleTableData data)
@@ -45,6 +46,7 @@ public class Role : MonoBehaviour
     //{
     //    _target = pos;
     //}
+
 
     public void SetMoveTarget(object sender,EventArgs args)
     {
@@ -72,8 +74,16 @@ public class Role : MonoBehaviour
     }
 
 
+    //事件注册 
     private void OnEnable()
     {
         EventCenter.Instance.RegesitEvent(EventName.eventJoyStickMove, SetMoveTarget);
+    }
+
+    
+
+    private void OnDisable()
+    {
+        EventCenter.Instance.RemoveEvent(EventName.eventJoyStickMove, SetMoveTarget);
     }
 }

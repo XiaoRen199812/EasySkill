@@ -15,9 +15,7 @@ public class GameEngine : MonoSingleton<GameEngine>
    
     private void OnEnable()
     {
-        //UI加载 初始化
-        GameObject ui = ResLoader.ResGetInstance("UI/Canvas");
-        UIMgr.Instance.Init(ui);
+      
 
         //人物加载 初始化
         RoleTable.Instance.Load(Config.RoleTablePath);
@@ -31,24 +29,20 @@ public class GameEngine : MonoSingleton<GameEngine>
         //摄像机动态创建
          ResLoader.ResGetInstance("MainCamera");
 
-        //摇杆 技能UI创建
-         UIMgr.Instance.AddUIObj("UI/Skills", UILayer.Fight);
-         UIMgr.Instance.AddUIObj("UI/JoyStickRoot", UILayer.Fight);
-
+        //UI加载 初始化
+        GameObject ui = ResLoader.ResGetInstance("UI/Canvas");
+        UIMgr.Instance.Init(ui);
         _fightTf = UIMgr.Instance.FindLayer(UILayer.Fight);
+        //摇杆 UI创建
+        UIMgr.Instance.AddUIObj("UI/JoyStickRoot", UILayer.Fight);
         Transform stickRoot = TransformHelper.FindChild(_fightTf, "JoystickRoot(Clone)");
-        
         JoyStick joystick= stickRoot.gameObject.AddComponent<JoyStick>();
-        //var imgDirBg = TransformHelper.FindChild(stickRoot, "imgDirBg");
-        //var imgDirPoint = TransformHelper.FindChild(stickRoot, "imgDirPoint");
-        //var arrowRoot = TransformHelper.FindChild(stickRoot, "ArrowRoot");
-        //joystick.Init(stickRoot, imgDirBg, imgDirPoint, arrowRoot);
 
+        //小地图创建
+        UIMgr.Instance.AddUIObj("UI/MiniMap", UILayer.Fight);
 
-
-
-
-
+        //技能UI创建 
+        UIMgr.Instance.AddUIObj("UI/Skills", UILayer.Fight);
     }
 
 }

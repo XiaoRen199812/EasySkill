@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//动画ID枚举
+//动画ID枚举   不同类型的动画分区间方便之后扩展
 public enum AnimID
 {
     //基础动作 1-10

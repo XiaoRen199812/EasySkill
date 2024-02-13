@@ -9,7 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+//UI层级
 public enum UILayer
 {
     Normal,
@@ -45,7 +45,7 @@ public class UIMgr : MonoSingleton<UIMgr>
         LayerDic.Add(UILayer.Announcement, _announcement);
     }
 
-
+    //生成并设置UI物体的父节点
     public  void AddUIObj(string resPath,UILayer uiLayer)
     {
         GameObject go=  ResLoader.ResGetInstance(resPath);
@@ -80,6 +80,7 @@ public class UIMgr : MonoSingleton<UIMgr>
        
     }
 
+    //移除某层UILayer 下的某个名为 uiName 的物体
     public  void RemoveUIObj(string uiName, UILayer uiLayer)
     {
         if (LayerDic.ContainsKey(uiLayer))
@@ -92,6 +93,7 @@ public class UIMgr : MonoSingleton<UIMgr>
         }
     }
 
+    //查找某层UI
     public Transform FindLayer(UILayer uiLayer)
     {
         if(LayerDic.ContainsKey(uiLayer))
@@ -101,7 +103,7 @@ public class UIMgr : MonoSingleton<UIMgr>
         return null;
     }
 
-
+    //移除某层UI下所有物体
     public void RemoveUILayer(UILayer uiLayer)
     {
         if (LayerDic.ContainsKey(uiLayer))
@@ -114,6 +116,7 @@ public class UIMgr : MonoSingleton<UIMgr>
         }
     }
 
+    //移除所有UI物体
     public void RemoveAllUILayer()
     {
 
