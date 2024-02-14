@@ -36,10 +36,10 @@ public class Role : MonoBehaviour
         _animator=GetComponent<Animator>();
         _animControl.Init(_animator);
 
-        _agent.stoppingDistance = 0.05f;
-        _agent.acceleration = 20;
-        _agent.angularSpeed = 360f;
-        
+        _agent.stoppingDistance = GameSetting.StoppingDistance;
+        _agent.acceleration = GameSetting.Acceleration;
+        _agent.angularSpeed = GameSetting.AngularSpeed;
+
     }
 
     //public void SetMoveTarget(Vector3 pos)
@@ -61,7 +61,7 @@ public class Role : MonoBehaviour
         {
             _agent.SetDestination(_target.Value);
             _animControl.PlayRun();
-            if(Vector3.Distance(transform.position,new Vector3(_target.Value.x,transform.position.y,_target.Value.z))<_agent.stoppingDistance)
+            if(MathEX.DistanceIngoreY(transform.position,_target.Value)<_agent.stoppingDistance)
              {
                 _animControl.PlayIdle();
                 _target = null;
