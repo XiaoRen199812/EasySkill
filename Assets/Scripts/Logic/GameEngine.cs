@@ -7,6 +7,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameEngine : MonoSingleton<GameEngine>
@@ -33,16 +34,10 @@ public class GameEngine : MonoSingleton<GameEngine>
         GameObject ui = ResLoader.ResGetInstance("UI/Canvas");
         UIMgr.Instance.Init(ui);
         _fightTf = UIMgr.Instance.FindLayer(UILayer.Fight);
-        //摇杆 UI创建
-        UIMgr.Instance.AddUIObj("UI/JoyStickRoot", UILayer.Fight);
-        Transform stickRoot = TransformHelper.FindChild(_fightTf, "JoystickRoot(Clone)");
-        JoyStick joystick= stickRoot.gameObject.AddComponent<JoyStick>();
 
-        //小地图创建
-        UIMgr.Instance.AddUIObj("UI/MiniMap", UILayer.Fight);
-
-        //技能UI创建 
-        UIMgr.Instance.AddUIObj("UI/Skills", UILayer.Fight);
+        //战斗UI
+        _fightTf.AddComponent<FightUIMgr>();
+        
     }
 
 }

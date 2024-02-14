@@ -46,17 +46,18 @@ public class UIMgr : MonoSingleton<UIMgr>
     }
 
     //生成并设置UI物体的父节点
-    public  void AddUIObj(string resPath,UILayer uiLayer)
+    public GameObject AddUIObj(string resPath,UILayer uiLayer)
     {
         GameObject go=  ResLoader.ResGetInstance(resPath);
         if (LayerDic.ContainsKey(uiLayer))
         {
             go.transform.SetParent(LayerDic[uiLayer], false);
         }
+        return go;
        
     }
 
-    public void AddUIObj(string resPath,UILayer uiLayer,RectTransform rectTransform)
+    public GameObject AddUIObj(string resPath,UILayer uiLayer,RectTransform rectTransform)
     {
         GameObject go = ResLoader.ResGetInstance(resPath);
         if (LayerDic.ContainsKey(uiLayer))
@@ -65,9 +66,10 @@ public class UIMgr : MonoSingleton<UIMgr>
             RectTransform rect = go.transform as RectTransform;
             rect = rectTransform;
         }
+        return go;
     }
 
-    public void AddUIObj(string resPath, UILayer uiLayer, Vector3 pos)
+    public GameObject AddUIObj(string resPath, UILayer uiLayer, Vector3 pos)
     {
         GameObject go = ResLoader.ResGetInstance(resPath);
         if (LayerDic.ContainsKey(uiLayer))
@@ -77,10 +79,11 @@ public class UIMgr : MonoSingleton<UIMgr>
             RectTransform rect = go.transform as RectTransform;
             rect.anchoredPosition3D = pos;
         }
-       
+        return go;
     }
 
     //移除某层UILayer 下的某个名为 uiName 的物体
+    //如果有重名的只移除找的第一个
     public  void RemoveUIObj(string uiName, UILayer uiLayer)
     {
         if (LayerDic.ContainsKey(uiLayer))
@@ -91,6 +94,11 @@ public class UIMgr : MonoSingleton<UIMgr>
                 GameObject.Destroy(tf.gameObject);
             }
         }
+    }
+    public void RemoveUIObj(GameObject go)
+    {
+        
+                GameObject.Destroy(go);
     }
 
     //查找某层UI
