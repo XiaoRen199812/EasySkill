@@ -28,5 +28,9 @@ public class TimeMgr : MonoSingleton<TimeMgr>
     public void Update()
     {
         tasks?.Invoke();
+        
     }
+
+   
+  
 }

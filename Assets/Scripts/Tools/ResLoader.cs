@@ -64,9 +64,10 @@ public class ResLoader : MonoSingleton<ResLoader>
     private AssetBundleManifest manifest = null;
 
     private Dictionary<string,AssetBundle> abCache = new Dictionary<string,AssetBundle>();
-    private AssetBundle LoadSimpleBag(string bagName)
+    public AssetBundle LoadSimpleBag(string bagName)
     {
         string path = ReadPath + "/" + BagName + "/" + bagName;
+     
         return AssetBundle.LoadFromFile(path);
     }
 

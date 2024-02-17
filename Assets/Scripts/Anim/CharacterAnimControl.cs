@@ -31,6 +31,8 @@ public enum AnimID
     Stun = 31,
 }
 
+//此只是某期视频使用，最好用帧事件去刷新状态
+//外界调的时候，最好给外界提过一个 animator.SetInt()的函数 比较方便
 public class CharacterAnimControl : MonoBehaviour
 {
 

@@ -16,6 +16,8 @@ public class FightUIMgr : MonoBehaviour
     //摇杆
     public JoyStick joystick;
 
+    //
+    public FightBtnPannel fightBtnPannel;
 
     public void Start()
     {
@@ -32,7 +34,8 @@ public class FightUIMgr : MonoBehaviour
         UIMgr.Instance.AddUIObj("UI/MiniMap", UILayer.Fight);
 
         //技能UI创建 
-        UIMgr.Instance.AddUIObj("UI/Skills", UILayer.Fight);
+      var skills=  UIMgr.Instance.AddUIObj("UI/Skills", UILayer.Fight);
+        fightBtnPannel = skills.AddComponent<FightBtnPannel>();
     }
 
 }

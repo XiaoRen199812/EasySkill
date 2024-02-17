@@ -43,7 +43,7 @@ public class Timer
     }
 
 
-    //当前任务是使用Time.deltaTime进行驱动
+   
     public void Loop()
     {
         if (_stop == false)
@@ -112,9 +112,9 @@ public class Timer
     }
 
 
-    
+
     //如果不是精确的驱动 就用Time.deltatime  如果是要较准确的更新 可能要用 Time.fixedDeltaTime
 
-
+  
    
 }
