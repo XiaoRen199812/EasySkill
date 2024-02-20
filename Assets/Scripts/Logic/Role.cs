@@ -8,7 +8,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,7 +30,7 @@ public class Role :Creature
     public void Init(RoleTableData data)
     {
         _data = data;
-        _agent = transform.AddComponent<NavMeshAgent>();
+        _agent = this.gameObject.AddComponent<NavMeshAgent>();
 
 
         _animator=GetComponent<Animator>();

@@ -8,7 +8,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 //注 可将PosOffest 设为(1.48, 9.92, -8.48) _smooth设为10
 //摄像机的 rotation(45.3, 2.6, 0.16) poaition (-25.765, 10, -46.52)

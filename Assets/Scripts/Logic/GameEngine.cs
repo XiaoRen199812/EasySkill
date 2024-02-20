@@ -7,7 +7,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class GameEngine : MonoSingleton<GameEngine>
@@ -36,7 +36,7 @@ public class GameEngine : MonoSingleton<GameEngine>
         _fightTf = UIMgr.Instance.FindLayer(UILayer.Fight);
 
         //战斗UI
-        _fightTf.AddComponent<FightUIMgr>();
+        _fightTf.gameObject.AddComponent<FightUIMgr>();
         
     }
 

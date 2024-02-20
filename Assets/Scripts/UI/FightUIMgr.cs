@@ -7,7 +7,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class FightUIMgr : MonoBehaviour
@@ -27,7 +27,7 @@ public class FightUIMgr : MonoBehaviour
         var imgDirBg = TransformHelper.FindChild(this.transform, "imgDirBg");
         var imgDirPoint = TransformHelper.FindChild(this.transform, "imgDirPoint");
         var arrowRoot = TransformHelper.FindChild(this.transform, "ArrowRoot");
-        joystick = stickRoot.AddComponent<JoyStick>();
+        joystick = stickRoot.gameObject.AddComponent<JoyStick>();
         joystick. Init(stickRoot, imgDirBg, imgDirPoint, arrowRoot);
 
         //小地图创建
