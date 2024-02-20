@@ -1,3 +1,4 @@
+
 /*
 日期：
 功能：远程普攻基础逻辑
@@ -20,7 +21,7 @@ using UnityEngine;
         _timeLine.AddEvent(0, 0, OnSkillStart); //第0秒开始 调用OnSkillStart  参数0 ,看成方法实际未使用该参数
         _timeLine.AddEvent(0, 11, OnAnimStart); //第0秒开始 调用OnAnimStart
         _timeLine.AddEvent(0.02f, 1, CreateFlyBall);//第0.02秒开始 调用 CreateFlyBall 参数是1 
-        _timeLine.AddEvent(1.6f, 1, OnAnimEnd);
+        _timeLine.AddEvent(1.6f, 11, OnAnimEnd);
         _timeLine.AddEvent(1.62f, 0, OnSkillEnd);
     }
 

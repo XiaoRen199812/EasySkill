@@ -11,8 +11,13 @@ using UnityEngine;
 
 public static class GameSetting
 { 
-   //角色寻路数据
+    //角色寻路数据
+    //停止速度
     public const float StoppingDistance = 0.05f;
+    //寻路加速度
     public const float Acceleration = 20;
+    //寻路角速度
     public const float AngularSpeed = 360f;
+    //人物最大拥有技能数
+    public const int CreatureMaxOwnSkills = 3;
 }

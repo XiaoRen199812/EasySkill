@@ -53,12 +53,12 @@ abstract class SkillLogicBase
         (_caster as Role).SetAnim(animID);
     }
 
-    protected virtual void OnAnimEnd(int animID)
+    protected virtual void OnAnimEnd(int endAnimID)
     {
         Role role = _caster as Role;
-        if (role != null && role.GetAnim() == animID)
+        if (role != null && role.GetAnim() == endAnimID)
         { 
-        (_caster as Role).SetAnim(animID);
+        (_caster as Role).SetAnim(1);
          }
     }
 

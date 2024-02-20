@@ -16,10 +16,10 @@ using UnityEngine.UI;
 
 public class Test : MonoBehaviour
 {
-   
+    public Role role;
     public void Start()
     {
-      
+      role=FindObjectOfType<Role>();
     
     }
 
@@ -27,7 +27,10 @@ public class Test : MonoBehaviour
     private void Update()
     {
         
-
+        if(Input.GetMouseButtonDown(0))
+        {
+            role.CastSkill(1);
+        }
 
 
 

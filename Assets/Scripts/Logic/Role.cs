@@ -26,10 +26,8 @@ public class Role :Creature
     //移动目标可空  主要避免引入过多标志位
     private Vector3? _target=null;
 
-   
-    //技能测试
-    SkillLogicBase _skillLogicBase;
-    public Creature Target;
+    private SkillMgr _skillMgr;
+
     public void Init(RoleTableData data)
     {
         _data = data;
@@ -44,11 +42,8 @@ public class Role :Creature
         _agent.acceleration = GameSetting.Acceleration;
         _agent.angularSpeed = GameSetting.AngularSpeed;
 
-        //创建火球逻辑 初始化相关事件
-        _skillLogicBase = new SkillFireBall();
-        _skillLogicBase.Init(this);
-
-        Target = GameObject.Find("Sphere").GetComponent<Creature>();
+        _skillMgr = gameObject.AddComponent<SkillMgr>();
+        _skillMgr.Init(this, null);
     }
 
     //public void SetMoveTarget(Vector3 pos)
@@ -77,18 +72,19 @@ public class Role :Creature
             }
         }
     }
+    //技能释放 UI按钮按下时调用该方法 内部由技能管理器负责释放
+    public void CastSkill(int index)
+    {
+        _skillMgr.TryCastSkill(index);
+    }
     private void Update()
     {
         MoveToTarget();
 
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            _skillLogicBase.Start(null, Target);
-            
-        }
-        _skillLogicBase.Loop();
+        Loop();
 
-       
+
+
     }
 
     public void SetAnim(int animID)
@@ -100,14 +96,19 @@ public class Role :Creature
     {
      return   _animator.GetInteger("State");
     }
+    //驱动技能时间线的更新
+    public void Loop()
+    {
+        _skillMgr.Loop();
+    }
+
     //事件注册 
     private void OnEnable()
     {
         EventCenter.Instance.RegesitEvent(EventName.eventJoyStickMove, SetMoveTarget);
     }
 
-    
-
+ 
     private void OnDisable()
     {
         EventCenter.Instance.RemoveEvent(EventName.eventJoyStickMove, SetMoveTarget);
