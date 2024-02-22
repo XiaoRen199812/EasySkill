@@ -29,15 +29,27 @@ using UnityEngine;
     protected virtual void CreateFlyBall(int flyballId)
     {
         //根据flyballId 查找配置表  
+        var flyObjDic = FlyObjectTable.Instance.GetDic();
+        var res = flyObjDic[flyballId];
+        
+        if (res != null)
+        {
+           
+            //生成火球
 
-        //生成火球
-        GameObject go= ResLoader.ResGetInstance<GameObject>("FireBallPrefabs/dajibullet");
-        go.transform.position = _caster.transform.position+new Vector3(0,0.8f,0);
-        go.transform.rotation = _caster.transform.rotation;
+            GameObject go = ResLoader.ResGetInstance<GameObject>(res.ResPath);
+            go.transform.position = _caster.transform.position + new Vector3(0, 0.8f, 0);
 
-        FireBall fireball= go.AddComponent<FireBall>();
-
-        fireball.Init(_caster, 0.2f, 0.2f, 3,3,onHitSomeThing ,_target);
+            go.transform.rotation = _caster.transform.rotation;
+           
+            FireBall fireball = go.AddComponent<FireBall>();
+           
+            fireball.Init(_caster, res.Radius, res.Height, res.FlySpeed, res.LifeTime, onHitSomeThing, _target);
+        }
+        else
+        {
+            Debug.LogError("未找到对应的飞行道具数据：" + flyballId);
+        }
         
     }
 

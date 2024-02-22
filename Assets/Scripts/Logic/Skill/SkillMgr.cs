@@ -14,15 +14,17 @@ public class SkillMgr : MonoBehaviour
 {
     Creature _owner;
     Creature _target;
-   // List<SkillLogicBase> skillLogicList = new List<SkillLogicBase>();
+    // List<SkillLogicBase> skillLogicList = new List<SkillLogicBase>();
     SkillFireBall skillLogic;
+
+   
     //初始化 
     public void Init(Creature owner,Creature target)
     {
         _owner = owner;
         _target = target;
         //初始化技能
-         skillLogic = new SkillFireBall();
+        skillLogic = new SkillFireBall();
         skillLogic.Init(_owner);
     }
 
@@ -39,15 +41,16 @@ public class SkillMgr : MonoBehaviour
         StartSkill(index);
     }
 
-    public void Loop()
-    {
-        skillLogic.Loop();
-    }
-
+   
     //放技能
     private void StartSkill(int index)
     {
         
         skillLogic.Start(null, _target); 
     }
+    public void Loop()
+    {
+        skillLogic.Loop();
+    }
+
 }

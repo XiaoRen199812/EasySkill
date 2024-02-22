@@ -16,11 +16,13 @@ public class GameEngine : MonoSingleton<GameEngine>
    
     private void OnEnable()
     {
-      
+        //读表
+        RoleTable.Instance.Load(Config.RoleTablePath);
+        var dic = RoleTable.Instance.GetDic();
+        FlyObjectTable.Instance.Load(Config.FlyObjectTablePath);
+
 
         //人物加载 初始化
-        RoleTable.Instance.Load(Config.RoleTablePath);
-        var dic= RoleTable.Instance.GetDic();
         GameObject go=   ResLoader.ResGetInstance(dic[1].ModelPath);
         go.transform.position = dic[1].InitPos;
         Role role= go.AddComponent<Role>();
@@ -37,7 +39,9 @@ public class GameEngine : MonoSingleton<GameEngine>
 
         //战斗UI
         _fightTf.gameObject.AddComponent<FightUIMgr>();
-        
+
+        //QuickCor Init
+        QuickCor.Instance.Init();
     }
 
 }

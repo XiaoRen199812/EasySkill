@@ -12,6 +12,7 @@ using UnityEngine;
 public static  class Config 
 {
     //为了避免外界修改改为Const 
-    public const string TablePath =  "/Table.csv.bytes";
-    public const string RoleTablePath =  "/Role.csv.bytes";
+    public const string TablePath ="/Table.csv.bytes";
+    public const string RoleTablePath ="/Role.csv.bytes";
+    public const string FlyObjectTablePath ="/FlyObject.csv.bytes";
 }

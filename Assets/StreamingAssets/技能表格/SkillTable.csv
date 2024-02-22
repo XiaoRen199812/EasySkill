@@ -1,0 +1,13 @@
+ID,SkillName,SkilDes,Damage,CastRange,PreTime,CD,DamageRange,DuringTime,Cost,SkillType,TimeLine
+1,火球,最简单的火球,5,0,0,3,0,0,2,,
+2,风暴术,简单AOE,,,,,,,,,
+3,平A,简单的普攻,,,,,,,,,
+4,妲己的R,定制技能,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,

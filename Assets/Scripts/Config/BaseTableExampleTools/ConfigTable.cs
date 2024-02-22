@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -35,13 +36,13 @@ public class ConfigTable<T,K> :MonoSingleton<K>
         //流读取配置表
         using (StreamReader stream = new StreamReader(url))
         {
-            //读第一行获取相关表格的属性信息 确保数据的类型与属性信息一一对应
-          string str=  stream.ReadLine();
-          string[] proInfo=  str.Split(',');
-            List<PropertyInfo> infolist = new List<PropertyInfo>();
-            for(int i=0; i<proInfo.Length; i++)
+            //读第一行获取相关表格的字段信息 确保数据的类型与字段信息一一对应
+            string str =  stream.ReadLine();
+          string[] fieldInfo=  str.Split(',');
+            List<FieldInfo> infolist = new List<FieldInfo>();
+            for(int i=0; i< fieldInfo.Length; i++)
             {
-             var info=   typeof(T).GetProperty(proInfo[i]);
+             var info=   typeof(T).GetField(fieldInfo[i]);
                 infolist.Add(info);
             }
 
@@ -58,32 +59,38 @@ public class ConfigTable<T,K> :MonoSingleton<K>
         }
     }
 
-    private T ReadALine(List<PropertyInfo> infolist,string str)
+    private T ReadALine(List<FieldInfo> infolist,string str)
     {
         T data=new T();
         string[] values=str.Split(",");
 
-        for(int i=0;i<infolist.Count;i++)
+       
+        for (int i=0;i<infolist.Count;i++)
         {
-            if (infolist[i].PropertyType==typeof(int))
+           
+            if (infolist[i].FieldType==typeof(int))
             {
                 infolist[i].SetValue(data, Convert.ToInt32(values[i]));
             }
-            else if(infolist[i].PropertyType == typeof(string))
+            else if(infolist[i].FieldType == typeof(string))
             {
                 infolist[i].SetValue(data, Convert.ToString(values[i]));
             }
-            else if(infolist[i].PropertyType == typeof(bool))
+            else if(infolist[i].FieldType == typeof(bool))
             {
                 infolist[i].SetValue(data, Convert.ToBoolean(values[i]));
             }
-            else if (infolist[i].PropertyType == typeof(double))
+            else if (infolist[i].FieldType == typeof(double))
             {
                 infolist[i].SetValue(data, Convert.ToDouble(values[i]));
             }
+            else if (infolist[i].FieldType == typeof(float))
+            {
+                infolist[i].SetValue(data, float.Parse(values[i]));
+            }
             //下面解析Vector3 List 等结构时 统一使用$隔开
             //这里只写一个解析Vector3的示例
-            else if(infolist[i].PropertyType==typeof(Vector3))
+            else if(infolist[i].FieldType == typeof(Vector3))
             {
                 string[] temp= values[i].Split('$');
                 if(temp.Length==3)
@@ -97,7 +104,7 @@ public class ConfigTable<T,K> :MonoSingleton<K>
                 }
             }
             //List<int>
-            else if(infolist[i].PropertyType == typeof(List<int>))
+            else if(infolist[i].FieldType == typeof(List<int>))
             {
                 string[] temp = values[i].Split('$');
                 List<int> res = new List<int>();
@@ -108,7 +115,7 @@ public class ConfigTable<T,K> :MonoSingleton<K>
                 infolist[i].SetValue(data, res);
 
             }
-            else if (infolist[i].PropertyType == typeof(List<float>))
+            else if (infolist[i].FieldType == typeof(List<float>))
             {
                 string[] temp = values[i].Split('$');
                 List<float> res = new List<float>();
@@ -119,7 +126,7 @@ public class ConfigTable<T,K> :MonoSingleton<K>
                 infolist[i].SetValue(data, res);
 
             }
-            else if (infolist[i].PropertyType == typeof(List<string>))
+            else if (infolist[i].FieldType == typeof(List<string>))
             {
                 string[] temp = values[i].Split('$');
                 List<string> res = new List<string>();
@@ -139,4 +146,5 @@ public class ConfigTable<T,K> :MonoSingleton<K>
         return Cache;
     }
 
+    
 }
