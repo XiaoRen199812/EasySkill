@@ -36,8 +36,9 @@ abstract class SkillLogicBase
 
     public virtual void OnSkillStart(int __null)
     {
-        //技能CD的初始化(暂时先不实现)
        
+        //技能CD的初始化(暂时先不实现)
+
         //将施法者的朝向面向目标
         if (_target != null)
         {
@@ -49,12 +50,13 @@ abstract class SkillLogicBase
     protected virtual void OnAnimStart(int animID)
     {
 
-        
+       
         (_caster as Role).SetAnim(animID);
     }
 
     protected virtual void OnAnimEnd(int endAnimID)
     {
+      
         Role role = _caster as Role;
         if (role != null && role.GetAnim() == endAnimID)
         { 
@@ -64,6 +66,7 @@ abstract class SkillLogicBase
 
     protected virtual void OnSkillEnd(int _nul)
     {
+       
         _target = null;
         _skillEndCallback?.Invoke();
     }

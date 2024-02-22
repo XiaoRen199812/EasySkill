@@ -60,6 +60,10 @@ public class Role :Creature
 
     private void MoveToTarget()
     {
+        if(_skillMgr.IsCasting)
+        {
+            return;
+        }
         if(_target!=null)
         {
             _agent.SetDestination(_target.Value);
@@ -94,6 +98,15 @@ public class Role :Creature
     public int GetAnim()
     {
      return   _animator.GetInteger("State");
+    }
+
+    // 停止 
+    public void StopMove()
+    {
+       
+        _target = null;
+       // _agent.isStopped = true;
+        SetAnim(1);
     }
     //驱动技能时间线的更新
     public void Loop()
