@@ -19,8 +19,8 @@ public class SkillMgr : MonoBehaviour
     //技能释放器
     SkillCaster _caster;
 
-    // List<SkillLogicBase> skillLogicList = new List<SkillLogicBase>();
-    SkillLogicBase skillLogic;
+    List<SkillObject> _skillList= new List<SkillObject>();
+   // SkillLogicBase skillLogic;
 
    public bool IsCasting { get { return _caster.IsCasting; } }
     //初始化 
@@ -32,16 +32,33 @@ public class SkillMgr : MonoBehaviour
         //释放器初始化
         _caster = new SkillCaster();
         _caster.Init(_owner);
-        //初始化技能
+
+        //初始化技能 
         for(int i=0;i<GameSetting.CreatureMaxOwnSkills;i++)
         {
-            //读表配技能暂不做
+            //注意索引 List 从0开始 字典的键当前项目是从1开始
+            SkillObject skillObj = new SkillObject();
+             int id= (_owner as Role).skillIDList[i];
+           var skillDic= SkillTable.Instance.GetDic();
+            skillObj.skillTableData = skillDic[id];
+            //创建对应的逻辑 
+            //提供两种思路 1.读表根据整数-》对应的技能类型枚举-》创建对应的技能
+            //2.反射：根据字符串-》创建对应的类型
+
+            //这里就使用反射了 
+            string skillType= skillDic[id].SkillType;
+            skillObj.skillLogicBase = typeof(SkillLogicBase).Assembly.CreateInstance(skillType) as SkillLogicBase;
+
+            skillObj.skillLogicBase.Init(_owner);
+            _skillList.Add(skillObj);
         }
-        // skillLogic = new SkillFireBall();
-        skillLogic = new SkillNormalAttack();
-        skillLogic.Init(_owner);
 
 
+        // skillLogic = new SkillFlyObject();
+        //skillLogic = new SkillNormalAttack();
+        //skillLogic.Init(_owner);
+
+        
     }
 
     //尝试释放技能
@@ -57,6 +74,9 @@ public class SkillMgr : MonoBehaviour
         if (_caster.IsCasting) { return; }
         //停止移动
         (_owner as Role).StopMove();
+
+        //注意列表中的索引和字典的索引
+        var skillLogic = _skillList[index - 1].skillLogicBase;
         //开始放技能
         _caster.CastSkill(skillLogic,_target);
     }

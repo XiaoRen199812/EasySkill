@@ -15,4 +15,5 @@ public static  class Config
     public const string TablePath ="/Table.csv.bytes";
     public const string RoleTablePath ="/Role.csv.bytes";
     public const string FlyObjectTablePath ="/FlyObject.csv.bytes";
+    public const string SkillTablePath = "/SkillTable.csv.bytes";
 }

@@ -31,5 +31,5 @@ public class SkillTableData:TableData
 
     public float Cost;
 
-
+    public string SkillType;
 }

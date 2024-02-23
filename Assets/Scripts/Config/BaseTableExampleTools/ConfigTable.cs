@@ -43,6 +43,11 @@ public class ConfigTable<T,K> :MonoSingleton<K>
             for(int i=0; i< fieldInfo.Length; i++)
             {
              var info=   typeof(T).GetField(fieldInfo[i]);
+                if(info==null)
+                {
+                    Debug.LogError("当前字段程序未配置：" + fieldInfo[i]);
+                    continue;
+                }
                 infolist.Add(info);
             }
 

@@ -10,7 +10,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- class SkillFireBall : SkillLogicBase
+ class SkillFlyObject : SkillLogicBase
 {
 
     public override void InitSkillTimeLineEvent()

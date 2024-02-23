@@ -17,9 +17,6 @@ public class Role :Creature
     private RoleTableData _data;
 
     private NavMeshAgent _agent;
-
-   
-
     private Animator _animator;
 
     //移动目标可空  主要避免引入过多标志位
@@ -27,20 +24,28 @@ public class Role :Creature
 
     private SkillMgr _skillMgr;
 
+    //角色ID
+   public int RoleID;
+    //技能ID列表  为了在控制台能直观地看到技能ID方便后续查找
+    public List<int> skillIDList=new
+        List<int>();
+
     public void Init(RoleTableData data)
     {
-        _data = data;
+       
         _agent = this.gameObject.AddComponent<NavMeshAgent>();
-
-
         _animator=GetComponent<Animator>();
-
-
-
         _agent.stoppingDistance = GameSetting.StoppingDistance;
         _agent.acceleration = GameSetting.Acceleration;
         _agent.angularSpeed = GameSetting.AngularSpeed;
 
+        
+
+        //模拟人物技能数据的初始化
+        _data = data;
+        RoleID = _data.ID;
+        skillIDList = _data.SkillList;
+        //注意初始化的先后顺序
         _skillMgr = gameObject.AddComponent<SkillMgr>();
         _skillMgr.Init(this, null);
     }

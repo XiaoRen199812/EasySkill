@@ -18,15 +18,15 @@ public class GameEngine : MonoSingleton<GameEngine>
     {
         //读表
         RoleTable.Instance.Load(Config.RoleTablePath);
-        var dic = RoleTable.Instance.GetDic();
+        var RoleDic = RoleTable.Instance.GetDic();
         FlyObjectTable.Instance.Load(Config.FlyObjectTablePath);
-
+        SkillTable.Instance.Load(Config.SkillTablePath);
 
         //人物加载 初始化
-        GameObject go=   ResLoader.ResGetInstance(dic[1].ModelPath);
-        go.transform.position = dic[1].InitPos;
+        GameObject go=ResLoader.ResGetInstance(RoleDic[1].ModelPath);
+        go.transform.position = RoleDic[1].InitPos;
         Role role= go.AddComponent<Role>();
-        RoleTableData data = new RoleTableData();
+        RoleTableData data = RoleDic[1];
         role.Init( data);
         
         //摄像机动态创建

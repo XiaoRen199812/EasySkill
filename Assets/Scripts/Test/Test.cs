@@ -31,13 +31,18 @@ public class Test : MonoBehaviour
         {
             role.CastSkill(1);
         }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            role.CastSkill(2);
+        }
+
 
 
 
     }
 
-    
-   
+
+
 
 }
 

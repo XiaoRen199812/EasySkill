@@ -19,5 +19,5 @@ public static class GameSetting
     //寻路角速度
     public const float AngularSpeed = 360f;
     //人物最大拥有技能数
-    public const int CreatureMaxOwnSkills = 3;
+    public const int CreatureMaxOwnSkills = 4;
 }
