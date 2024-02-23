@@ -20,7 +20,7 @@ public class SkillMgr : MonoBehaviour
     SkillCaster _caster;
 
     // List<SkillLogicBase> skillLogicList = new List<SkillLogicBase>();
-    SkillFireBall skillLogic;
+    SkillLogicBase skillLogic;
 
    public bool IsCasting { get { return _caster.IsCasting; } }
     //初始化 
@@ -37,7 +37,8 @@ public class SkillMgr : MonoBehaviour
         {
             //读表配技能暂不做
         }
-        skillLogic = new SkillFireBall();
+        // skillLogic = new SkillFireBall();
+        skillLogic = new SkillNormalAttack();
         skillLogic.Init(_owner);
 
 
@@ -67,9 +68,6 @@ public class SkillMgr : MonoBehaviour
         _caster.Loop();
     }
 
-    public void OnSkillEnd()
-    {
-
-    }
+   
 
 }

@@ -30,7 +30,7 @@ public class SkillCaster
     internal void CastSkill(SkillLogicBase skillLogic,Creature Target)
     {
         _castingSkill=skillLogic;
-        skillLogic.Start(OnSkillLogicEnd, Target);
+        _castingSkill.Start(OnSkillLogicEnd, Target);
     }
 
 

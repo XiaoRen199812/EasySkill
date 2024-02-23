@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract class SkillLogicBase
+ public abstract class SkillLogicBase
 {
     //技能释放者
     public Creature _caster;

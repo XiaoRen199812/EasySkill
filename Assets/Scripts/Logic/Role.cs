@@ -60,6 +60,7 @@ public class Role :Creature
 
     private void MoveToTarget()
     {
+        //放技能时不响应移动事件
         if(_skillMgr.IsCasting)
         {
             return;
@@ -105,7 +106,7 @@ public class Role :Creature
     {
        
         _target = null;
-       // _agent.isStopped = true;
+       
         SetAnim(1);
     }
     //驱动技能时间线的更新
