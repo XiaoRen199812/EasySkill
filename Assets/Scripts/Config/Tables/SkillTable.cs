@@ -18,7 +18,7 @@ public class SkillTable : ConfigTable<SkillTableData,SkillTable>
 public class SkillTableData:TableData
 {
     public string SkillName;
-    public string SkilDes;
+    public string SkillDes;
 
     public float Damage;
 

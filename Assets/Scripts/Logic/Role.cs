@@ -8,7 +8,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -100,7 +99,7 @@ public class Role :Creature
             _agent.SetDestination(_target.Value);
             SetAnim(2);
             if(MathEX.DistanceIngoreY(transform.position,_target.Value)<_agent.stoppingDistance)
-             {
+            {
                 SetAnim(1);
                 _target = null;
             }

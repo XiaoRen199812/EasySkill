@@ -15,7 +15,7 @@ public class AOESettlement : MonoBehaviour
     //释放者
     private Creature _caster;
     private CapsuleCollider _capsuleCollider;
-    private Rigidbody _rigibody;
+    private Rigidbody _rigidbody;
 
     private float _radius;
     private float _height;
@@ -28,8 +28,8 @@ public class AOESettlement : MonoBehaviour
     {
         _caster = caster;
         _onHitCallBack = OnHitCallBack;
-        _rigibody =GetComponent<Rigidbody>();
-        _rigibody.useGravity = false;
+        _rigidbody =GetComponent<Rigidbody>();
+        _rigidbody.useGravity = false;
 
         _capsuleCollider= GetComponent<CapsuleCollider>();
         _capsuleCollider.isTrigger = true;
@@ -83,7 +83,7 @@ public class AOESettlement : MonoBehaviour
     }
 
     //结算结束
-    public void OnHitEnd()
+    private void OnHitEnd()
     {
         _capsuleCollider.enabled = false;
         _onHitCallBack?.Invoke(_list,this);

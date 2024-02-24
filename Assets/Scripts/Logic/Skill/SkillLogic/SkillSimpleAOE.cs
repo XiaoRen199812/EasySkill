@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
+
 
 public class SkillSimpleAOE : SkillLogicBase
 {
@@ -49,7 +49,7 @@ public class SkillSimpleAOE : SkillLogicBase
                 main.loop = false;
             }
 
-          float lifeTime=  parDic[ParticleID].LifeTime;
+            float lifeTime=  parDic[ParticleID].LifeTime;
             GameObject.Destroy(_particle, lifeTime);
         }
     }

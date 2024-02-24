@@ -12,7 +12,7 @@ using UnityEngine;
 public class ResLoader : MonoSingleton<ResLoader>
 {
     
-    //Resouces的封装 后续有需求继续封装
+    //Resources的封装 后续有需求继续封装
     public static Object ResLoad(string path)
     {
        return Resources.Load(path);
@@ -88,7 +88,7 @@ public class ResLoader : MonoSingleton<ResLoader>
             LoadMainManifest();
         }
 
-      string[] res=  manifest.GetAllDependencies(bagName);
+        string[] res=  manifest.GetAllDependencies(bagName);
         //如果有依赖的包 先加载依赖的包
         if (res.Length > 0)
         {

@@ -26,12 +26,12 @@ public class ConfigTable<T,K> :MonoSingleton<K>
     //关于反射性能开销较大，这里一般读取一次 把数据缓存
     private Dictionary<int,T> Cache = new Dictionary<int,T>();
 
-    public void Load(string ConfigPath)
+    public void Load(string configPath)
     {
         Cache.Clear();
 
         //注意不同平台下路径不同 需根据平台去写
-        string url = Application.streamingAssetsPath + ConfigPath;
+        string url = Application.streamingAssetsPath + configPath;
 
         //流读取配置表
         using (StreamReader stream = new StreamReader(url))
@@ -39,7 +39,7 @@ public class ConfigTable<T,K> :MonoSingleton<K>
             //读第一行获取相关表格的字段信息 确保数据的类型与字段信息一一对应
             string str =  stream.ReadLine();
           string[] fieldInfo=  str.Split(',');
-            List<FieldInfo> infolist = new List<FieldInfo>();
+            List<FieldInfo> infoList = new List<FieldInfo>();
             for(int i=0; i< fieldInfo.Length; i++)
             {
              var info=   typeof(T).GetField(fieldInfo[i]);
@@ -48,14 +48,14 @@ public class ConfigTable<T,K> :MonoSingleton<K>
                     Debug.LogError("当前字段程序未配置：" + fieldInfo[i]);
                     continue;
                 }
-                infolist.Add(info);
+                infoList.Add(info);
             }
 
             //正式循环读取
             string res;
             while((res=stream.ReadLine())!=null)
             {
-              T data=  ReadALine(infolist, res);
+              T data=  ReadALine(infoList, res);
                 Cache.Add(data.ID, data);
 
 
@@ -64,45 +64,45 @@ public class ConfigTable<T,K> :MonoSingleton<K>
         }
     }
 
-    private T ReadALine(List<FieldInfo> infolist,string str)
+    private T ReadALine(List<FieldInfo> infoList,string str)
     {
         T data=new T();
         string[] values=str.Split(",");
 
        
-        for (int i=0;i<infolist.Count;i++)
+        for (int i=0;i<infoList.Count;i++)
         {
           
-            if (infolist[i].FieldType==typeof(int))
+            if (infoList[i].FieldType==typeof(int))
             {
                
-                infolist[i].SetValue(data, Convert.ToInt32(values[i]));
+                infoList[i].SetValue(data, Convert.ToInt32(values[i]));
             }
-            else if(infolist[i].FieldType == typeof(string))
+            else if(infoList[i].FieldType == typeof(string))
             {
-                infolist[i].SetValue(data, Convert.ToString(values[i]));
+                infoList[i].SetValue(data, Convert.ToString(values[i]));
             }
-            else if(infolist[i].FieldType == typeof(bool))
+            else if(infoList[i].FieldType == typeof(bool))
             {
-                infolist[i].SetValue(data, Convert.ToBoolean(values[i]));
+                infoList[i].SetValue(data, Convert.ToBoolean(values[i]));
             }
-            else if (infolist[i].FieldType == typeof(double))
+            else if (infoList[i].FieldType == typeof(double))
             {
-                infolist[i].SetValue(data, Convert.ToDouble(values[i]));
+                infoList[i].SetValue(data, Convert.ToDouble(values[i]));
             }
-            else if (infolist[i].FieldType == typeof(float))
+            else if (infoList[i].FieldType == typeof(float))
             {
-                infolist[i].SetValue(data, float.Parse(values[i]));
+                infoList[i].SetValue(data, float.Parse(values[i]));
             }
             //下面解析Vector3 List 等结构时 统一使用$隔开
             //这里只写一个解析Vector3的示例
-            else if(infolist[i].FieldType == typeof(Vector3))
+            else if(infoList[i].FieldType == typeof(Vector3))
             {
                 string[] temp= values[i].Split('$');
                 if(temp.Length==3)
                 {
                     Vector3 v = new Vector3(float.Parse(temp[0]), float.Parse(temp[1]), float.Parse(temp[2]));
-                    infolist[i].SetValue(data, v);
+                    infoList[i].SetValue(data, v);
                 }
                 else
                 {
@@ -110,7 +110,7 @@ public class ConfigTable<T,K> :MonoSingleton<K>
                 }
             }
             //List<int>
-            else if(infolist[i].FieldType == typeof(List<int>))
+            else if(infoList[i].FieldType == typeof(List<int>))
             {
                 string[] temp = values[i].Split('$');
                 List<int> res = new List<int>();
@@ -118,10 +118,10 @@ public class ConfigTable<T,K> :MonoSingleton<K>
                 {
                     res.Add(int.Parse(temp[k]));
                 }
-                infolist[i].SetValue(data, res);
+                infoList[i].SetValue(data, res);
 
             }
-            else if (infolist[i].FieldType == typeof(List<float>))
+            else if (infoList[i].FieldType == typeof(List<float>))
             {
                 string[] temp = values[i].Split('$');
                 List<float> res = new List<float>();
@@ -129,10 +129,10 @@ public class ConfigTable<T,K> :MonoSingleton<K>
                 {
                     res.Add(float.Parse(temp[k]));
                 }
-                infolist[i].SetValue(data, res);
+                infoList[i].SetValue(data, res);
 
             }
-            else if (infolist[i].FieldType == typeof(List<string>))
+            else if (infoList[i].FieldType == typeof(List<string>))
             {
                 string[] temp = values[i].Split('$');
                 List<string> res = new List<string>();
@@ -140,7 +140,7 @@ public class ConfigTable<T,K> :MonoSingleton<K>
                 {
                     res.Add(temp[k]);
                 }
-                infolist[i].SetValue(data, res);
+                infoList[i].SetValue(data, res);
 
             }
         }

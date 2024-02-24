@@ -14,7 +14,7 @@ public class TransformHelper
 { 
 
     //删除某节点下所有子物体
-  public static void  DestoryAllChild(Transform transform)
+  public static void  DestroyAllChild(Transform transform)
     {
         for(int i=0;i<transform.childCount;i++)
         {

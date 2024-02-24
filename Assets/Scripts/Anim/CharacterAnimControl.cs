@@ -166,7 +166,7 @@ public class CharacterAnimControl : MonoBehaviour
 
     }
 
-    //通过AnimaterClipInfo 找对应的名字
+    //通过AnimatorClipInfo 找对应的名字
     private string GetCurrentAnimName()
     {
         string str = null;

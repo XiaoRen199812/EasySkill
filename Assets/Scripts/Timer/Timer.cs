@@ -113,7 +113,7 @@ public class Timer
 
 
 
-    //如果不是精确的驱动 就用Time.deltatime  如果是要较准确的更新 可能要用 Time.fixedDeltaTime
+    //如果不是精确的驱动 就用Time.Deltatime  如果是要较准确的更新 可能要用 Time.fixedDeltaTime
 
   
    

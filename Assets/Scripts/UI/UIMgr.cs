@@ -119,7 +119,7 @@ public class UIMgr : MonoSingleton<UIMgr>
             
             if (LayerDic[uiLayer].childCount >0)
             {
-                TransformHelper.DestoryAllChild(LayerDic[uiLayer]);
+                TransformHelper.DestroyAllChild(LayerDic[uiLayer]);
             }     
         }
     }

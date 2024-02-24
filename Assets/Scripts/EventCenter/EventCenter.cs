@@ -13,7 +13,7 @@ public class EventCenter : MonoSingleton<EventCenter>
 {
    //存储事件    事件名   委托/事件
    //一般使用无返回值的委托
-    public Dictionary<string,EventHandler> eventDic= new Dictionary<string,EventHandler>();
+    private Dictionary<string,EventHandler> eventDic= new Dictionary<string,EventHandler>();
 
 
     //注册事件  事件名  相关函数
@@ -33,9 +33,9 @@ public class EventCenter : MonoSingleton<EventCenter>
     public void RemoveEvent(string eventName, EventHandler e)
     {
        if(eventDic.ContainsKey(eventName))
-        {
+       {
             eventDic[eventName] -= e;
-        }
+       }
     }
 
     // 触发事件  事件名 事件源 

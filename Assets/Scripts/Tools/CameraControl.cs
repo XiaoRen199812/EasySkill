@@ -11,7 +11,7 @@ using UnityEngine;
 
 
 //注 可将PosOffest 设为(1.48, 9.92, -8.48) _smooth设为10
-//摄像机的 rotation(45.3, 2.6, 0.16) poaition (-25.765, 10, -46.52)
+//摄像机的 rotation(45.3, 2.6, 0.16) position (-25.765, 10, -46.52)
 public class CameraControl : MonoBehaviour
 {
 
