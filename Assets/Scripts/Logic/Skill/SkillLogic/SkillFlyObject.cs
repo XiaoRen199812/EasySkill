@@ -38,7 +38,7 @@ using UnityEngine;
             //生成火球
 
             GameObject go = ResLoader.ResGetInstance<GameObject>(res.ResPath);
-            go.transform.position = _caster.transform.position + new Vector3(0, 0.8f, 0);
+            go.transform.position = (_caster as Role)._midPoint.position;
 
             go.transform.rotation = _caster.transform.rotation;
            

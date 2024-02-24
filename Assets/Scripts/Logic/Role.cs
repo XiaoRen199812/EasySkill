@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -29,7 +30,9 @@ public class Role :Creature
     //技能ID列表  为了在控制台能直观地看到技能ID方便后续查找
     public List<int> skillIDList=new
         List<int>();
-
+    //技能释放的相关点位
+    public Transform _midPoint;
+    public Transform _btnPoint;
     public void Init(RoleTableData data)
     {
        
@@ -47,14 +50,36 @@ public class Role :Creature
         skillIDList = _data.SkillList;
         //注意初始化的先后顺序
         _skillMgr = gameObject.AddComponent<SkillMgr>();
-        _skillMgr.Init(this, null);
+        _skillMgr.Init(this, null); ;
+
+        SetPoint();
     }
 
     //public void SetMoveTarget(Vector3 pos)
     //{
     //    _target = pos;
     //}
-
+    public void SetPoint()
+    {
+        var res1= TransformHelper.FindChild(this.gameObject.transform, "MidPoint");
+        if (res1!=null)
+        {
+            _midPoint = res1;
+        }
+        else
+        {
+            Debug.LogError("技能相关释放点当前模型未设置");
+        }
+        var res2 = TransformHelper.FindChild(this.gameObject.transform, "ButtonPoint");
+        if (res2 != null)
+        {
+            _btnPoint = res2;
+        }
+        else
+        {
+            Debug.LogError("技能相关释放点当前模型未设置");
+        }
+    }
 
     public void SetMoveTarget(object sender,EventArgs args)
     {
