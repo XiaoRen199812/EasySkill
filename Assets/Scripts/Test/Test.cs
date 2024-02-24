@@ -35,6 +35,10 @@ public class Test : MonoBehaviour
         {
             role.CastSkill(2);
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            role.CastSkill(3);
+        }
 
 
 

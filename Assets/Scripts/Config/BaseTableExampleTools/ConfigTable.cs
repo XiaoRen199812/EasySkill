@@ -72,9 +72,10 @@ public class ConfigTable<T,K> :MonoSingleton<K>
        
         for (int i=0;i<infolist.Count;i++)
         {
-           
+          
             if (infolist[i].FieldType==typeof(int))
             {
+               
                 infolist[i].SetValue(data, Convert.ToInt32(values[i]));
             }
             else if(infolist[i].FieldType == typeof(string))

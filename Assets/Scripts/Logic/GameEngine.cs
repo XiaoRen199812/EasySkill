@@ -21,8 +21,10 @@ public class GameEngine : MonoSingleton<GameEngine>
         var RoleDic = RoleTable.Instance.GetDic();
         FlyObjectTable.Instance.Load(Config.FlyObjectTablePath);
         SkillTable.Instance.Load(Config.SkillTablePath);
-
+        ParticleObjectTable.Instance.Load(Config.ParticleObjectPath);
+        SettlementObjectTable.Instance.Load(Config.SettlementObjectPath);
         //人物加载 初始化
+        
         GameObject go=ResLoader.ResGetInstance(RoleDic[1].ModelPath);
         go.transform.position = RoleDic[1].InitPos;
         Role role= go.AddComponent<Role>();
@@ -42,6 +44,7 @@ public class GameEngine : MonoSingleton<GameEngine>
 
         //QuickCor Init
         QuickCor.Instance.Init();
+        
     }
 
 }

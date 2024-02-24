@@ -58,9 +58,9 @@ using UnityEngine;
     {
       
         Role role = _caster as Role;
-        if (role != null && role.GetAnim() == endAnimID)
+        if (role != null && role.GetAnim() != endAnimID)
         { 
-        (_caster as Role).SetAnim(1);
+        (_caster as Role).SetAnim(endAnimID);
          }
     }
 

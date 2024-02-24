@@ -41,8 +41,8 @@ using UnityEngine;
             go.transform.position = (_caster as Role)._midPoint.position;
 
             go.transform.rotation = _caster.transform.rotation;
-           
-            FireBall fireball = go.AddComponent<FireBall>();
+
+            FlyObject fireball = go.AddComponent<FlyObject>();
            
             fireball.Init(_caster, res.Radius, res.Height, res.FlySpeed, res.LifeTime, onHitSomeThing, _target);
         }
@@ -54,7 +54,7 @@ using UnityEngine;
     }
 
     //击中回调
-    private void onHitSomeThing(FireBall ball, Creature target)
+    private void onHitSomeThing(FlyObject ball, Creature target)
     {
         
         if(target!=null)
