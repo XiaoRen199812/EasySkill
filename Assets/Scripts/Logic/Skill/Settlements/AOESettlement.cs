@@ -69,8 +69,7 @@ public class AOESettlement : MonoBehaviour
             return;
         }
         _list.Add(creature);
-        Debug.Log(other.gameObject.name);
-        Debug.Log(_list.Count);
+       
     }
 
     //伤害等待
