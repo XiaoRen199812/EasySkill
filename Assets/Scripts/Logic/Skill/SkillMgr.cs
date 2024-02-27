@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class SkillMgr : MonoBehaviour
@@ -20,7 +21,7 @@ public class SkillMgr : MonoBehaviour
     SkillCaster _caster;
 
     List<SkillObject> _skillList= new List<SkillObject>();
-   // SkillLogicBase skillLogic;
+   
 
    public bool IsCasting { get { return _caster.IsCasting; } }
     //初始化 
@@ -54,9 +55,6 @@ public class SkillMgr : MonoBehaviour
         }
 
 
-        // skillLogic = new SkillFlyObject();
-        //skillLogic = new SkillNormalAttack();
-        //skillLogic.Init(_owner);
 
         
     }
@@ -72,11 +70,28 @@ public class SkillMgr : MonoBehaviour
         
         //在放技能吗 在退出 不能连放
         if (_caster.IsCasting) { return; }
+
+      
+
         //停止移动
         (_owner as Role).StopMove();
 
         //注意列表中的索引和字典的索引
+        var skillObj = _skillList[index - 1];
         var skillLogic = _skillList[index - 1].skillLogicBase;
+        //如果技能不需要目标 CastRange 为-1 不检测目标 直接检测
+        if(skillObj.skillTableData.CastRange!=-1)
+        {
+            //需要施法目标 才施法距离判断
+            if (_target == null) { Debug.LogError("该技能需要目标，但目标不存在"); return; }
+            var dis = MathEX.DistanceIngoreY(this.transform.position, _target.gameObject.transform.position);
+            if(dis>skillObj.skillTableData.CastRange)
+            {
+                Debug.LogError("目标超出该角色的施法距离");
+                return;
+            }
+        }
+        
         //开始放技能
         _caster.CastSkill(skillLogic,_target);
     }

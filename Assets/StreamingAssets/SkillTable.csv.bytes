@@ -1,5 +1,5 @@
 ID,SkillName,SkillDes,Damage,CastRange,PreTime,CD,DamageRange,DuringTime,Cost,SkillType,TimeLine
-1,火球,最简单的火球,10,0,0,3,0,0,5,SkillFlyObject,
-2,平A,简单的普攻,5,0,0,0.2,0,0,0,SkillNormalAttack,
-3,风暴术,简单AOE,15,0,0,3,0,0,10,SkillSimpleAOE,
-4,毒化术,持续性伤害,1,0,0,3,0,0,15,SkillNormalAttack,
+1,禄冒脟貌,脳卯录貌碌楼碌脛禄冒脟貌,10,-1,0,3,0,0,5,SkillFlyObject,
+2,脝陆A,录貌碌楼碌脛脝脮鹿楼,5,-1,0,0.2,0,0,0,SkillNormalAttack,
+3,路莽卤漏脢玫,录貌碌楼AOE,15,-1,0,3,4,0,10,SkillSimpleAOE,
+4,露戮禄炉脢玫,鲁脰脨酶脨脭脡脣潞娄,1,-1,0,3,0,0,15,SkillNormalAttack,
